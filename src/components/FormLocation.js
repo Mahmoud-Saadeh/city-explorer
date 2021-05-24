@@ -48,7 +48,7 @@ export class FormLocation extends Component {
       weather = error.response;
       this.setState({
         weatherError: true,
-        weatherErrorValue: error.message,
+        weatherErrorValue: `${error.message}, ${error.response.data}`,
       });
     }
     console.log(weather);
