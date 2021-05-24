@@ -45,11 +45,13 @@ export class FormLocation extends Component {
         `${server}/weather?city_name=${this.state.inputLocation}`
       );
     } catch (error) {
+      weather = error.response;
       this.setState({
         weatherError: true,
         weatherErrorValue: error.message,
       });
     }
+    console.log(weather);
     const allWeatherData = {
       data: weather.data,
       error: this.state.weatherError,
