@@ -5,6 +5,7 @@ import Weather from './components/Weather';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Movies from './components/Movies';
 
 export class App extends Component {
   constructor(props) {
@@ -14,14 +15,16 @@ export class App extends Component {
       error: false,
       errorValue: '',
       allWeatherData: {},
+      allMovieData: {},
     };
   }
-  getFormData = (formData, error, errorValue, allWeatherData) => {
+  getFormData = (formData, error, errorValue, allWeatherData, allMovieData) => {
     this.setState({
       formData,
       error,
       errorValue,
       allWeatherData,
+      allMovieData,
     });
   };
 
@@ -42,13 +45,32 @@ export class App extends Component {
             </Col>
           </Row>
           {!this.state.error && this.state.allWeatherData.data && (
-            <Row>
-              <Weather
-                weatherData={this.state.allWeatherData.data}
-                error={this.state.allWeatherData.error}
-                errorValue={this.state.allWeatherData.errorValue}
-              />
-            </Row>
+            <>
+              <h2 style={{ margin: '20px 0' }}>
+                The Weather for {this.state.allWeatherData.data.length} Days
+              </h2>
+              <Row>
+                <Weather
+                  weatherData={this.state.allWeatherData.data}
+                  error={this.state.allWeatherData.error}
+                  errorValue={this.state.allWeatherData.errorValue}
+                />
+              </Row>
+            </>
+          )}
+          {!this.state.error && this.state.allMovieData.data && (
+            <>
+              <h2 style={{ margin: '20px 0' }}>
+                Top {this.state.allMovieData.data.length} Movies
+              </h2>
+              <Row>
+                <Movies
+                  movieData={this.state.allMovieData.data}
+                  error={this.state.allMovieData.error}
+                  errorValue={this.state.allMovieData.errorValue}
+                />
+              </Row>
+            </>
           )}
         </Container>
       </div>
