@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Row, Card, Col, Image, Alert } from 'react-bootstrap';
+import { Row, Card, Col, Alert } from 'react-bootstrap';
 
-export class Weather extends Component {
+export class Movies extends Component {
   render() {
     return (
       <>
@@ -14,36 +14,24 @@ export class Weather extends Component {
         ) : typeof this.props.weatherData === 'string' ? (
           <Col sm="12" lg="12">
             <Alert style={{ margin: '20px 0 20px 0' }} variant="danger">
-              {this.props.weatherData}
+              {this.props.movieData}
             </Alert>
           </Col>
         ) : (
           <>
-            {this.props.weatherData.map((item, index) => (
+            {this.props.movieData.map((item, index) => (
               <Col sm="6" lg="4" key={index}>
                 <Card style={{ margin: '20px 0 20px 0' }}>
+                  {item.image_url && (
+                    <Card.Img
+                      variant="top"
+                      src={`https://image.tmdb.org/t/p/w500${item.image_url}`}
+                    />
+                  )}
                   <Card.Body>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        margin: '0px 20px 0 0',
-                      }}
-                    >
-                      <Image
-                        src={item.icon}
-                        alt={item.description}
-                        style={{ width: '30px' }}
-                      />
-                      <Card.Text
-                        style={{
-                          margin: '0px 7px',
-                        }}
-                      >
-                        {item.description}
-                      </Card.Text>
-                    </div>
-                    <Card.Text>{item.date}</Card.Text>
+                    <Card.Text>{item.released_on}</Card.Text>
+                    <Card.Title>{item.title}</Card.Title>
+                    <Card.Text>{item.overview}</Card.Text>
                     <Row
                       style={{
                         margin: '10px 0px 0 0',
@@ -51,12 +39,17 @@ export class Weather extends Component {
                     >
                       <Col sm="12" lg="6">
                         <Card.Text style={{ textAlign: 'center' }}>
-                          Min. Temp.: {item.low_temp} &#8451;
+                          popularity: {item.popularity}
                         </Card.Text>
                       </Col>
                       <Col sm="12" lg="6">
                         <Card.Text style={{ textAlign: 'center' }}>
-                          Max. Temp.: {item.max_temp} &#8451;
+                          Total Votes: {item.total_votes}
+                        </Card.Text>
+                      </Col>
+                      <Col sm="12" lg="6">
+                        <Card.Text style={{ textAlign: 'center' }}>
+                          Avg. Votes: {item.average_votes}
                         </Card.Text>
                       </Col>
                     </Row>
@@ -71,4 +64,4 @@ export class Weather extends Component {
   }
 }
 
-export default Weather;
+export default Movies;

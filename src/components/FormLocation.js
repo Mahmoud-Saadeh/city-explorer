@@ -11,6 +11,8 @@ export class FormLocation extends Component {
       errorValue: '',
       weatherError: false,
       weatherErrorValue: '',
+      movieError: false,
+      movieErrorValue: '',
     };
   }
   locationInputHandler = (e) => {
@@ -24,6 +26,7 @@ export class FormLocation extends Component {
     this.setState({
       error: false,
       weatherError: false,
+      movieError: false,
     });
     let locations;
     try {
@@ -42,7 +45,7 @@ export class FormLocation extends Component {
     let weather;
     try {
       weather = await axios.get(
-        `${server}/weather?city_name=${this.state.inputLocation}`
+        `${server}/weather?lat=${location.lat}&lon=${location.lon}`
       );
     } catch (error) {
       weather = error.response;
@@ -51,18 +54,35 @@ export class FormLocation extends Component {
         weatherErrorValue: `${error.message}, ${error.response.data}`,
       });
     }
-    console.log(weather);
+    let movie;
+    try {
+      movie = await axios.get(
+        `${server}/movies?city_name=${this.state.inputLocation}`
+      );
+    } catch (error) {
+      movie = error.response;
+      this.setState({
+        movieError: true,
+        movieErrorValue: `${error.message}, ${error.response.data}`,
+      });
+    }
     const allWeatherData = {
       data: weather.data,
       error: this.state.weatherError,
       errorValue: this.state.weatherErrorValue,
+    };
+    const allMovieData = {
+      data: movie.data,
+      error: this.state.movieError,
+      errorValue: this.state.movieErrorValue,
     };
 
     this.props.getFormData(
       location,
       this.state.error,
       this.state.errorValue,
-      allWeatherData
+      allWeatherData,
+      allMovieData
     );
   };
   render() {
@@ -77,7 +97,11 @@ export class FormLocation extends Component {
               onChange={this.locationInputHandler}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={this.state.inputLocation ? false : true}
+          >
             Explore!
           </Button>
         </Form>
