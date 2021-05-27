@@ -31,6 +31,12 @@ export class App extends Component {
     });
   };
   getMoviesData = (allMovieData) => {
+    let dateObj = new Date(allMovieData.data.date);
+    let month = dateObj.getUTCMonth() + 1;
+    let day = dateObj.getUTCDate();
+    let year = dateObj.getUTCFullYear();
+
+    allMovieData.data.date = year + '/' + month + '/' + day;
     this.setState({
       allMovieData,
     });
@@ -71,12 +77,15 @@ export class App extends Component {
           )}
           {!this.state.error && this.state.allMovieData.data && (
             <>
-              <h2 style={{ margin: '20px 0' }}>
-                Top {this.state.allMovieData.data.length} Movies
+              <h2 style={{ margin: '20px 0 10px 0' }}>
+                Top {this.state.allMovieData.data.movies.length} Movies
               </h2>
+              <p style={{ fontSize: '12px' }}>
+                The last Update: {this.state.allMovieData.data.date}
+              </p>
               <Row>
                 <Movies
-                  movieData={this.state.allMovieData.data}
+                  movieData={this.state.allMovieData.data.movies}
                   error={this.state.allMovieData.error}
                   errorValue={this.state.allMovieData.errorValue}
                 />

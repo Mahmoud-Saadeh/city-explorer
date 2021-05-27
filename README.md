@@ -1,7 +1,7 @@
 # [City Explorer](https://city-explorer-mahmoud.netlify.app/)
 
 **Author**: Mahmoud Saadeh
-**Version**: 1.3.0
+**Version**: 1.4.0
 
 ## Overview
 
@@ -24,6 +24,7 @@ for the design, I only used Bootstrap library and some CSS.
 23-5-2021 7:00pm - Application now has a fully-functional location search.
 24-5-2021 6:00pm - Application now has a weather feature and a server.
 26-5-2021 7:30pm - Application now has the top 20 Movies.
+27-5-2021 3:30pm - some refactoring and added the last time the movies have been updated.
 
 ## Credit and Collaborations
 
