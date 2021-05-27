@@ -18,23 +18,34 @@ export class App extends Component {
       allMovieData: {},
     };
   }
-  getFormData = (formData, error, errorValue, allWeatherData, allMovieData) => {
+  getFormData = (formData, error, errorValue) => {
     this.setState({
       formData,
       error,
       errorValue,
+    });
+  };
+  getWeatherData = (allWeatherData) => {
+    this.setState({
       allWeatherData,
+    });
+  };
+  getMoviesData = (allMovieData) => {
+    this.setState({
       allMovieData,
     });
   };
-
   render() {
     return (
       <div>
         <Container>
           <Row>
             <Col sm="12" lg="6">
-              <FormLocation getFormData={this.getFormData} />
+              <FormLocation
+                getFormData={this.getFormData}
+                getWeatherData={this.getWeatherData}
+                getMoviesData={this.getMoviesData}
+              />
             </Col>
             <Col sm="12" lg="6">
               <Location
