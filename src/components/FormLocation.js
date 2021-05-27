@@ -72,7 +72,7 @@ export class FormLocation extends Component {
       errorValue: this.state.movie.movieErrorValue,
     });
   };
-  ///////////////////////////////////////end getWeatherData
+  ///////////////////////////////////////end getMoviesData
   formHandler = async (e) => {
     e.preventDefault();
     const token = process.env.REACT_APP_LOCATION_TOKEN;
