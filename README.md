@@ -1,7 +1,7 @@
 # [City Explorer](https://city-explorer-mahmoud.netlify.app/)
 
 **Author**: Mahmoud Saadeh
-**Version**: 1.2.0
+**Version**: 1.3.0
 
 ## Overview
 
